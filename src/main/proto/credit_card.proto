@@ -1,0 +1,22 @@
+syntax = "proto2";
+
+package io.lenses.examples.serde.protobuf;
+
+option java_package = "io.lenses.examples.serde.protobuf.generated";
+option java_outer_classname = "CardData";
+
+message CreditCard {
+  required string name = 1;
+  required string country = 2;
+  required string currency = 3;
+  required string cardNumber = 4;
+  required bool blocked = 5;
+
+  enum CardType {
+      VISA = 0;
+      MC = 1;
+      AMEX = 2;
+    }
+
+  required CardType cardType = 6;
+}
