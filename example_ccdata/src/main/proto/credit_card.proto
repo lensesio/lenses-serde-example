@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package io.lenses.examples.serde.protobuf;
+
+option java_package = "io.lenses.examples.serde.protobuf.generated";
+option java_outer_classname = "CCData";
+
+message CreditCard {
+  required string number = 1;
+  required string customerFirstName = 2;
+  required string customerLastName = 3;
+  required string country = 4;
+  required string currency = 5;
+  required bool blocked = 6;
+}
