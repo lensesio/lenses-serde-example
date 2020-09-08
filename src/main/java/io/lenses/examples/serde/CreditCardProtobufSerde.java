@@ -3,7 +3,7 @@ package io.lenses.examples.serde;
 import com.landoop.lenses.lsql.serde.Deserializer;
 import com.landoop.lenses.lsql.serde.Serde;
 import com.landoop.lenses.lsql.serde.Serializer;
-import io.lenses.examples.serde.protobuf.generated.CardData;
+import io.lenses.examples.serde.protobuf.generated.CCData;
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
 import org.apache.avro.generic.GenericData;
@@ -15,11 +15,11 @@ import java.util.Properties;
 public class CreditCardProtobufSerde implements Serde {
 
     private Schema schema = SchemaBuilder.builder()
-            .record("credit_card")
+            .record("credit_card_data_proto")
             .fields()
-            .requiredString("name")
-            .requiredString("cardNumber")
-            .requiredString("cardType")
+            .requiredString("number")
+            .requiredString("customerFirstName")
+            .requiredString("customerLastName")
             .requiredString("country")
             .requiredString("currency")
             .requiredBoolean("blocked")
@@ -31,13 +31,13 @@ public class CreditCardProtobufSerde implements Serde {
         return new Serializer() {
             @Override
             public byte[] serialize(GenericRecord record) throws IOException {
-                CardData.CreditCard card = CardData.CreditCard.newBuilder()
-                        .setName((String) record.get("name"))
-                        .setCardNumber((String) record.get("cardNumber"))
-                        .setCardType(CardData.CreditCard.CardType.valueOf((String) record.get("cardType")))
+                CCData.CreditCard card = CCData.CreditCard.newBuilder()
+                        .setNumber((String) record.get("number"))
+                        .setCustomerFirstName((String) record.get("customerFirstName"))
+                        .setCustomerLastName((String) record.get("customerLastName"))
                         .setCountry((String) record.get("country"))
-                        .setBlocked((boolean) record.get("blocked"))
                         .setCurrency((String) record.get("currency"))
+                        .setBlocked((boolean) record.get("blocked"))
                         .build();
                 return card.toByteArray();
             }
@@ -54,12 +54,12 @@ public class CreditCardProtobufSerde implements Serde {
             @Override
             public GenericRecord deserialize(byte[] bytes) throws IOException {
 
-                CardData.CreditCard card = CardData.CreditCard.parseFrom(bytes);
+                CCData.CreditCard card = CCData.CreditCard.parseFrom(bytes);
 
                 GenericRecord record = new GenericData.Record(schema);
-                record.put("name", card.getName());
-                record.put("cardNumber", card.getCardNumber());
-                record.put("cardType", card.getCardType().name());
+                record.put("number", card.getNumber());
+                record.put("customerFirstName", card.getCustomerFirstName());
+                record.put("customerLastName", card.getCustomerLastName());
                 record.put("country", card.getCountry());
                 record.put("currency", card.getCurrency());
                 record.put("blocked", card.getBlocked());
