@@ -34,7 +34,7 @@ public class CreditCardProtobufSerde implements Serde {
                 CardData.CreditCard card = CardData.CreditCard.newBuilder()
                         .setName((String) record.get("name"))
                         .setCardNumber((String) record.get("cardNumber"))
-                        .setCardType(CardData.CreditCard.CardType.valueOf((String) record.get("cardType")))
+                        .setType((String) record.get("cardType"))
                         .setCountry((String) record.get("country"))
                         .setBlocked((boolean) record.get("blocked"))
                         .setCurrency((String) record.get("currency"))
@@ -59,7 +59,7 @@ public class CreditCardProtobufSerde implements Serde {
                 GenericRecord record = new GenericData.Record(schema);
                 record.put("name", card.getName());
                 record.put("cardNumber", card.getCardNumber());
-                record.put("cardType", card.getCardType().name());
+                record.put("cardType", card.getType());
                 record.put("country", card.getCountry());
                 record.put("currency", card.getCurrency());
                 record.put("blocked", card.getBlocked());

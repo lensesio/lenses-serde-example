@@ -11,12 +11,6 @@ message CreditCard {
   required string currency = 3;
   required string cardNumber = 4;
   required bool blocked = 5;
+  required string type = 6;
 
-  enum CardType {
-      VISA = 0;
-      MC = 1;
-      AMEX = 2;
-    }
-
-  required CardType cardType = 6;
 }

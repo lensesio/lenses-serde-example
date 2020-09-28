@@ -16,6 +16,7 @@
         <protobuf.version>3.4.0</protobuf.version>
         <build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
         <maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
+        <avro.version>1.8.2</avro.version>
     </properties>
 
     <repositories>
@@ -37,6 +38,21 @@
             <groupId>com.landoop</groupId>
             <artifactId>lenses-serde</artifactId>
             <version>${lenses.serdes.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-maven-plugin</artifactId>
+            <version>${avro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-protobuf</artifactId>
+            <version>${avro.version}</version>
         </dependency>
     </dependencies>
 
@@ -122,7 +138,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>
